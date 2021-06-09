@@ -69,7 +69,9 @@ class MemberServiceTest {
         IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
 
         assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
-/*      예외처리를 try / catch로 할 수 있으나 뭔가 애매함 (왜징 )
+/*      예외처리를 try / catch로 할 수 있으나 뭔가 애매함 (왜징)
+        test case에 try catch를 굳이 안넣어도 되니까 ???
+        예외처리를 하는것이 이상하니까 ,,
         try {
             memberService.join(member2);
             fail("예외가 발생해야 합니다.");

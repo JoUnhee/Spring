@@ -33,6 +33,11 @@ class MemoryMemberRepositoryTest {
 
         repository.save(member);
         /* Q. optional에서 바로 get으로 꺼내는게 왜 안좋을까 ???*/
+        /* Optional에 대한 이해 필요
+         * Optional을 거치지 않고 get으로 꺼낸 경우, Optional에서 정제해주는 정보를 받는게 아닌 직접 찾아버리는 느낌이므로
+         * 예외처리 등이 추가해야함
+         * Optional에서 만약 NUll을 get할경우 Nullpointerexception이 발생함
+         */
         Member result = repository.findById(member.getId()).get();
         assertThat(member).isEqualTo(result);
 
