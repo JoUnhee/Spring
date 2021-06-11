@@ -16,18 +16,18 @@ public class HelloController {
     * Spring boot의 viewResolver가 리턴 value(문자)를 확인하고 해당 화면을 찾아서 처리한다
     * ex) resources:templates/ +{ViewName} + .html
     * */
-    @GetMapping("hello")
+    //@GetMapping("hello")
     public String hello(Model model) {
         model.addAttribute("data","hello!!");
         return "hello";
     }
-    @GetMapping("hello-mvc")
+    //@GetMapping("hello-mvc")
     public String helloMvc(@RequestParam("name") String name, Model model) {
         model.addAttribute("name", name);
         return "hello-template";
     }
 
-    @GetMapping("hello-string")
+    //@GetMapping("hello-string")
     @ResponseBody
     public String helloString(@RequestParam("name") String name){
         return "That's quite a cool " + name;
