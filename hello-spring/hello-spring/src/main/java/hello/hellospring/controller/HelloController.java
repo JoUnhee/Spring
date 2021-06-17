@@ -10,12 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelloController {
 
     /*
-    * Web application에서 /hello로 진입했을 때, GetMapping annotation의 값을 보고 해당 메소드 실행
-    * Spring에서 알아서 다 해주네 ㅎㅎ
-    * return value를 확인하고, 해당 template에 rendering 해라 -> model을 전달해줘라
-    * Spring boot의 viewResolver가 리턴 value(문자)를 확인하고 해당 화면을 찾아서 처리한다
     * ex) resources:templates/ +{ViewName} + .html
-    * */
+    */
     //@GetMapping("hello")
     public String hello(Model model) {
         model.addAttribute("data","hello!!");
@@ -48,7 +44,6 @@ public class HelloController {
         public String getName() {
             return name;
         }
-
         public void setName(String name) {
             this.name = name;
         }

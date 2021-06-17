@@ -16,19 +16,13 @@ import java.util.List;
 @Controller
 public class MemberController {
 
-    /*
-     * Spring이 @Service / @Repository를 Container에 등록
-     * @ => Component scan 각각 service / repository / service annotation은 살펴보면 @component로 구현되어 있음
-     * 하위 Package들은 spring이 알아서 scan 해주지만, 다른 Package는 대상이 되지 않음
-     */
-
     //@Autowired private MemberService memberService; -> 필드 주입
 
     private final MemberService memberService;
 
     @Autowired
     public MemberController(MemberService memberService) {
-        /* MemberService couldn't be found... => MemberService의 객체가 Spring container에게 들어가 있지 않음
+        /*
          * 생성자 주입 방법
          * 조립 단계에서만 접근되므로 관리상 용이
          */
@@ -50,7 +44,7 @@ public class MemberController {
     public String createForm() {
         /* Get 방식을 통해, 해당 createForm 메소드로 접근되고
          * 별 다른 process 없이 createMemberForm Template으로 접근함
-         * 이후 ViewResolver에 의해 해당 html이 선택이 되고 thyleaf engine이 html을 rendering함
+         * 이후 ViewResolver에 의해 해당 html이 선택이 되고 thymeleaf engine이 html을 rendering함
          * 아직 까지는 thymeleaf가 관여하는 부분이 적음
          * */
         return "members/createMemberForm";
@@ -74,7 +68,6 @@ public class MemberController {
         return "redirect:/";
     }
 
-    /* ctrl + E -> 원하는/해당하는 method 찾아줌*/
     @GetMapping("/members")
     public String list(Model model) {
         List<Member> members = memberService.findMembers();
