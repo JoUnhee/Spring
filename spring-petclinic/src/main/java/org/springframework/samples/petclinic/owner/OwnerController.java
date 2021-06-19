@@ -79,28 +79,43 @@ class OwnerController {
 		return "owners/findOwners";
 	}
 
+	/* 갈아끼우는것 말고 옵션을 줘서 선택하게끔 구현해보는것 고려해보자 */
 	@GetMapping("/owners")
 	public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
-
-		// allow parameterless GET request for /owners to return all records
-		if (owner.getLastName() == null) {
-			owner.setLastName(""); // empty string signifies broadest possible search
+		/*
+		 * // allow parameterless GET request for /owners to return all records if
+		 * (owner.getLastName() == null) { owner.setLastName(""); // empty string
+		 * signifies broadest possible search }
+		 *
+		 *
+		 * // find owners by last name Collection<Owner> results =
+		 * this.owners.findByLastName(owner.getLastName()); if (results.isEmpty()) { // no
+		 * owners found result.rejectValue("lastName", "notFound", "not found"); return
+		 * "owners/findOwners"; } else if (results.size() == 1) { // 1 owner found owner =
+		 * results.iterator().next(); return "redirect:/owners/" + owner.getId(); } else {
+		 * // multiple owners found model.put("selections", results); return
+		 * "owners/ownersList"; }
+		 */
+		/*
+		 * 2021-06-17 Unhee added for homework If there is no First name (which it will
+		 * never happend,) To search all owner, we put empty strings
+		 */
+		if (owner.getFirstName() == null) {
+			owner.setFirstName("");
 		}
+		Collection<Owner> results = this.owners.findByFirstName(owner.getFirstName());
 
-		// find owners by last name
-		Collection<Owner> results = this.owners.findByLastName(owner.getLastName());
 		if (results.isEmpty()) {
-			// no owners found
-			result.rejectValue("lastName", "notFound", "not found");
+			// no owner
+			result.rejectValue("firstName", "notFound", "not found");
 			return "owners/findOwners";
 		}
 		else if (results.size() == 1) {
-			// 1 owner found
+
 			owner = results.iterator().next();
 			return "redirect:/owners/" + owner.getId();
 		}
 		else {
-			// multiple owners found
 			model.put("selections", results);
 			return "owners/ownersList";
 		}
