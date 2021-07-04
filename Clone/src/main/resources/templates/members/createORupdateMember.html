@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<meta charset="UTF-8">
+<body>
+<form th:object="${member}" method="post">
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="get me your name">
+            <label for="team">팀</label>
+            <input type="text" id="team" th:field="*{team}" placeholder="get me your team">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button class="btn btn-default" type="submit">제출</button>
+            </div>
+        </div>
+    </form>
+<div>
+    <a href="welcome">홈</a>
+</div>
+</body>
+</html>

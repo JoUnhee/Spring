@@ -1,0 +1,23 @@
+<html xmlns:th="https://www.thymeleaf.org">
+<meta charset="UTF-8">
+<body>
+<form th:object="${searchInfo}" method="post">
+    <div class="searchForm-group">
+        <label for="searchFlag">소속 팀으로 검색</label>
+        <input type="checkbox" id="searchFlag" th:field="*{searchFlag}">
+        <br />
+        <br />
+        <label for="searchKey">검색 문자열</label>
+        <input type="text" id="searchKey" th:field="*{searchKey}">
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-default" type="submit">검색</button>
+        </div>
+    </div>
+    <div>
+        <a href="welcome">홈</a>
+    </div>
+</form>
+</body>
+</html>

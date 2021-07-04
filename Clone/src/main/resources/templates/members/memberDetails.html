@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org">
+<meta charset="UTF-8">
+    <body>
+        <h2>Owner Information</h2>
+            <table class="table table-striped" th:object="${member}">
+                <tr>
+                    <th>이름</th>
+                    <td><b th:text="*{name}"></b></td>
+                </tr>
+                <tr>
+                    <th>소속</th>
+                    <td th:text="*{team}"></td>
+                </tr>
+            </table>
+
+            <a th:href="@{{id}/edit(id=${member.id})}" class="btn btn-default">회원 정보 수정</a>
+            <a th:href="@{{id}/delete(id=${member.id})}" class="btn btn-default">회원 삭제</a>
+            <br />
+            <br />
+            <br />
+            <br />
+    <br />
+        <div>
+            <a href="welcome">홈</a>
+        </div>
+
+    </body>
+
+</html>
