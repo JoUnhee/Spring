@@ -1,6 +1,9 @@
 package spring.basicproject;
 
+import spring.basicproject.discount.DiscountPolicy;
 import spring.basicproject.discount.FixDiscountPolicy;
+import spring.basicproject.discount.RateDiscountPolicy;
+import spring.basicproject.member.MemberRepository;
 import spring.basicproject.member.MemberService;
 import spring.basicproject.member.MemberServiceImpl;
 import spring.basicproject.member.MemoryMemberRepository;
@@ -9,17 +12,24 @@ import spring.basicproject.order.OrderServiceImpl;
 
 public class AppConfig {
 
-    /* Application에 대한 환경 구성을 모두 이 클래스에서 수행
-     * - Application의 실제 동작에 필요한 구현 객체를 생성
-     * - 생성자 주입을 통한 DIP 준수
-     *
-     * */
+    /*
+     * Method call을 통해 역할이 분명하게 드러나도록 할 수 있음
+     * -> 역할과 구현 클래스가 한눈에 들어옴옴     */
+    public DiscountPolicy discountPolicy() {
+        return new RateDiscountPolicy();
+    }
+
+    private MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+
+
     public MemberService memberService() {
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
     }
 
     public OrderService orderService () {
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountPolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
 }
