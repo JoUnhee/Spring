@@ -1,5 +1,6 @@
 package spring.basicproject.order;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import spring.basicproject.discount.DiscountPolicy;
 import spring.basicproject.member.Member;
 import spring.basicproject.member.MemberRepository;
@@ -9,10 +10,12 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
