@@ -2,8 +2,10 @@ package spring.basicproject.order;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.stereotype.Component;
+import spring.basicproject.annotation.MainDiscountPolicy;
 import spring.basicproject.discount.DiscountPolicy;
 import spring.basicproject.member.Member;
 import spring.basicproject.member.MemberRepository;
@@ -13,7 +15,17 @@ import spring.basicproject.member.MemberRepository;
 public class OrderServiceImpl implements OrderService{
 
     private final MemberRepository memberRepository;
+    @Qualifier("mainDiscountPolicy")
     private final DiscountPolicy discountPolicy;
+
+    /* 기본적인 annotation 사용 방법
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+    */
+
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
